@@ -1,69 +1,30 @@
-import { Component } from 'react';
-import { ContactList } from './ContactList/ContactList';
-import { Filter } from './Filter/Filter';
-import { Form } from './Form/Form';
+import { Profile } from './Profile/Profile';
+import { Statistics } from './Statistics/Statistics';
+import { StatisticsList } from './StatisticsList/StatisticsList';
+import { FriendList } from './FriendList/FriendList';
+import { TransactionHistory } from './TransactionHistory/TransactionHistory';
 
-export class App extends Component {
-  state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
-    filter: '',
-  };
+import user from './data/user.json';
+import data from './data/data.json';
+import friends from './data/friends.json';
+import transactions from './data/transactions.json';
 
-  deleteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-    }));
-  };
-
-  addUserData = user => {
-    if (
-      this.state.contacts.some(
-        option => option.name.toLowerCase() === user.name.toLowerCase()
-      )
-    ) {
-      alert(`${user.name} is already in contacts.`);
-      return;
-    } else if (
-      this.state.contacts.some(option => option.number === user.number)
-    ) {
-      alert(`${user.number} is already in contacts.`);
-      return;
-    }
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, user],
-    }));
-  };
-
-  getContactList = () => {
-    const { contacts, filter } = this.state;
-    return contacts.filter(user =>
-      user.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
-
-  userFilter = ({ target: { value } }) => {
-    this.setState({ filter: value });
-  };
-
-  render() {
-    return (
-      <>
-        <div className="container">
-          <h1 className="mainText">Phonebook</h1>
-          <Form addUserData={this.addUserData} />
-          <h2 className="mainText">Contacts</h2>
-          <Filter userFilter={this.userFilter} />
-          <ContactList
-            contactList={this.getContactList()}
-            onDelete={this.deleteContact}
-          />
-        </div>
-      </>
-    );
-  }
-}
+export const App = () => {
+  const { username, tag, location, avatar, stats } = user;
+  return (
+    <>
+      <Profile
+        username={username}
+        tag={tag}
+        location={location}
+        avatar={avatar}
+        stats={stats}
+      />
+      <Statistics title="Upload stats">
+        <StatisticsList stats={data} />
+      </Statistics>
+      <FriendList friends={friends} />
+      <TransactionHistory items={transactions} />
+    </>
+  );
+};

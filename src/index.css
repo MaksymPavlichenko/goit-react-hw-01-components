@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -29,19 +28,8 @@ p {
   margin: 0;
 }
 
-:root {
-  --main-color: #FFD100;
-  --second-color: #0082D1;
+img {
+  max-width: 100%;
+  height: auto;
 }
 
-.container {
-  background: var(--second-color);
-  max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 15px;
-}
-
-.mainText {
-  color: var(--main-color);
-}

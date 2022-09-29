@@ -1,0 +1,9 @@
+.frienList {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFD100;
+}
